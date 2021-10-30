@@ -1,0 +1,58 @@
+[advisories]
+vulnerability = "deny"
+unmaintained = "warn"
+notice = "warn"
+ignore = []
+
+[licenses]
+unlicensed = "deny"
+allow = []
+deny = []
+copyleft = "warn"
+allow-osi-fsf-free = "either"
+confidence-threshold = 0.8
+exceptions = [
+    # ring uses code from multiple libraries but all with permissive licenses
+    # https://tldrlegal.com/license/openssl-license-(openssl)
+    { allow = ["ISC", "MIT", "OpenSSL"], name = "ring" },
+
+]
+
+[[licenses.clarify]]
+name = "ring"
+# SPDX considers OpenSSL to encompass both the OpenSSL and SSLeay licenses
+# https://spdx.org/licenses/OpenSSL.html
+# ISC - Both BoringSSL and ring use this for their new files
+# MIT - "Files in third_party/ have their own licenses, as described therein. The MIT
+# license, for third_party/fiat, which, unlike other third_party directories, is
+# compiled into non-test libraries, is included below."
+# OpenSSL - Obviously
+expression = "ISC AND MIT AND OpenSSL"
+license-files = [
+    { path = "LICENSE", hash = 0xbd0eed23 },
+]
+
+[bans]
+multiple-versions = "deny"
+highlight = "all"
+skip-tree = []
+skip = [
+    # rustls uses old version (dev dep)
+    { name = "spin", version = "=0.5.2" },
+    # tokio-postgres uses old version (dev dep)
+    { name = "hmac", version = "=0.10.1" },
+    { name = "crypto-mac" },
+    # async-session uses old version (dev dep)
+    { name = "cfg-if", version = "=0.1.10" },
+    # async-graphql has a few outdated deps (dev dep)
+    { name = "sha-1", version = "=0.8.2" },
+    { name = "opaque-debug", version = "=0.2.3" },
+    { name = "generic-array", version = "=0.12.4" },
+    { name = "digest", version = "=0.8.1" },
+    { name = "block-buffer", version = "=0.7.3" },
+]
+
+[sources]
+unknown-registry = "warn"
+unknown-git = "warn"
+allow-git = []
