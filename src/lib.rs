@@ -6,7 +6,7 @@
 //! use axum::{
 //!     Router,
 //!     response::IntoResponse,
-//!     handler::get,
+//!     routing::get,
 //! };
 //! use axum_typed_websockets::{Message, WebSocket, WebSocketUpgrade};
 //! use serde::{Serialize, Deserialize};
