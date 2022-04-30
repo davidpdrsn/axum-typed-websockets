@@ -16,7 +16,7 @@ default = ["json"]
 json = ["serde_json"]
 
 [dependencies]
-axum = { version = "0.4", features = ["ws"] }
+axum = { version = "0.5", features = ["ws"] }
 futures-util = { version = "0.3", default-features = false, features = ["alloc"] }
 serde = "1.0"
 serde_json = { version = "1.0", optional = true }
