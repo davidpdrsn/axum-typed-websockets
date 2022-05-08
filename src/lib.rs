@@ -191,7 +191,7 @@ impl<S, R, C> WebSocketUpgrade<S, R, C> {
     pub fn on_upgrade<F, Fut>(self, callback: F) -> impl IntoResponse
     where
         F: FnOnce(WebSocket<S, R, C>) -> Fut + Send + 'static,
-        Fut: Future + Send + 'static,
+        Fut: Future<Output = ()> + Send + 'static,
         S: Send,
         R: Send,
     {
