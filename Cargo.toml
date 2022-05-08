@@ -1,6 +1,6 @@
 [package]
 name = "axum-typed-websockets"
-version = "0.3.0"
+version = "0.4.0"
 authors = ["David Pedersen <david.pdrsn@gmail.com>"]
 categories = ["asynchronous", "network-programming", "web-programming"]
 description = "axum::extract::ws with type safe messages"
