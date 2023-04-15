@@ -109,7 +109,8 @@
 
 use axum::{
     async_trait,
-    extract::{ws, FromRequest, RequestParts},
+    extract::{ws, FromRequestParts},
+    http::request::Parts,
     response::IntoResponse,
 };
 use futures_util::{Sink, SinkExt, Stream, StreamExt};
@@ -168,14 +169,14 @@ with_and_without_json! {
 }
 
 #[async_trait]
-impl<S, R, C, B> FromRequest<B> for WebSocketUpgrade<S, R, C>
+impl<S, R, C, B> FromRequestParts<B> for WebSocketUpgrade<S, R, C>
 where
-    B: Send,
+    B: Send + Sync,
 {
-    type Rejection = <ws::WebSocketUpgrade as FromRequest<B>>::Rejection;
+    type Rejection = <ws::WebSocketUpgrade as FromRequestParts<B>>::Rejection;
 
-    async fn from_request(req: &mut RequestParts<B>) -> Result<Self, Self::Rejection> {
-        let upgrade = FromRequest::from_request(req).await?;
+    async fn from_request_parts(parts: &mut Parts, state: &B) -> Result<Self, Self::Rejection> {
+        let upgrade = FromRequestParts::from_request_parts(parts, state).await?;
         Ok(Self {
             upgrade,
             _marker: PhantomData,
