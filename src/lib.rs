@@ -17,10 +17,14 @@
 //!
 //! # async {
 //! // Run it!
-//! axum::Server::bind(&"0.0.0.0:3000".parse().unwrap())
-//!     .serve(app.into_make_service())
-//!     .await
-//!     .unwrap();
+//! axum::serve(
+//!     tokio::net::TcpListener::bind("0.0.0.0:3000")
+//!         .await
+//!         .unwrap(),
+//!     app.into_make_service()
+//! )
+//! .await
+//! .unwrap();
 //! # };
 //!
 //! async fn handler(
@@ -101,7 +105,7 @@
     missing_debug_implementations,
     missing_docs
 )]
-#![deny(unreachable_pub, private_in_public)]
+#![deny(unreachable_pub, private_interfaces, private_bounds)]
 #![allow(elided_lifetimes_in_paths, clippy::type_complexity)]
 #![forbid(unsafe_code)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
