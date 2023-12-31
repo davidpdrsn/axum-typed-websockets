@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # Unreleased
 
+- Update to axum 0.7 ([#6])
+
+[#6]: https://github.com/davidpdrsn/axum-typed-websockets/pull/6
+
+# 0.5.0 (15. April, 2023)
+
 - Update to axum 0.6.
 
 # 0.4.0 (0.8. May, 2022)
